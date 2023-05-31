@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            padding-top: 5rem;
+        }
+        .footer {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            background-color: #f8f9fa;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+        <a class="navbar-brand" href="#">Bioinformatics Tool</a>
+    </nav>
+
+    <main role="main" class="container">
+        <div class="jumbotron">
+            <h1 class="display-4">Sequence LogoMaker</h1>
+            <form action="/result" method="POST" onsubmit="return validateForm()">
+                <div class="form-group">
+                    <label for="sequence">Sequence:</label>
+                    <textarea class="form-control" id="sequence" name="sequence" style="height: 15rem;"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <span class="text-muted">Axelardy 1093556</span>
+        </div>
+    </footer>
+
+    <!-- Add Bootstrap and JQuery JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+    function validateForm() {
+        let sequence = document.getElementById('sequence').value;
+        if (sequence === '') {
+            alert('Sequence field cannot be empty');
+            return false;
+        }
+        return true;
+    }
+    </script>
+</body>
+</html>

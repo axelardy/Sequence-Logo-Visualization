@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            padding-top: 5rem;
+        }
+        .footer {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            background-color: #f8f9fa;
+            text-align: center;
+        }
+    </style>
+    <script>
+        function changeImageType() {
+            const imageType = document.getElementById('imageType').value;
+            const imageUrl = "{{ url_for('static', filename='output.') }}" + imageType;
+            const imageElement = document.querySelector('.img-fluid');
+            const downloadButton = document.querySelector('.btn');
+    
+            imageElement.src = imageUrl;
+            downloadButton.href = imageUrl;
+            downloadButton.download = 'download.' + imageType;
+        }
+    </script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+        <a class="navbar-brand" href="/">Bioinformatics Tool</a>
+    </nav>
+
+    <main role="main" class="container">
+        <div class="jumbotron">
+            <h1 class="display-3">Result Logo</h1>
+            <img src="{{ url_for('static', filename='output.svg') }}" alt="processed image" class="img-fluid rounded mx-auto d-block">
+            <div class="d-flex justify-content-center my-3">
+                <h6 class="h6">Image type: </h6>
+                <select class = "form-select" aria-label="Select image type" id="imageType" onchange="changeImageType()">
+                    <option value="svg">SVG</option>
+                    <option value="png">PNG</option>
+                    <option value="jpg">JPG</option>
+                </select>
+            </div>
+            
+            <div class="justify-content-center d-flex "> 
+                <a class="btn btn-primary btn-lg" href="{{ url_for('static', filename='output.svg') }}" role="button" download="download.svg">Download</a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <span class="text-muted">&copy; 2023 Axelardy 1093556</span>
+        </div>
+    </footer>
+
+    <!-- Add Bootstrap and JQuery JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
