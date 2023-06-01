@@ -10,11 +10,13 @@ colors_zip = {'A': '#b36139', 'C': '#ef0300', 'D': '#068855', 'E': '#028489', 'F
 print(colors_zip)
 
 def processing(sequences):
-    sequences,valSize,valSame = string2list(sequences)
+    sequences,valSize,valSame,valValid = string2list(sequences)
     if not valSize:
         return render_template("error.html", error = "Sequences is more than 16" )
     elif not valSame:
         return render_template("error.html", error = "Sequences are not consistent in lenght" )
+    elif not valValid:
+        return render_template("error.html", error = "Invalid characters detected in the input sequences. Only the characters A, R, N, D, C, Q, E, G, H, I, L, K, M, F, P, S, T, W, Y, and V are allowed. Please check your input and try again." )
     drawlogo(sequences)
     return render_template("result.html", result = result)
 
@@ -22,6 +24,7 @@ def processing(sequences):
 def string2list(sequences):
     valSize = True
     valSame = True
+    valValid = True
     sequences = sequences.split('\n')
     sequences = [sequence.upper().strip('\r') for sequence in sequences if sequence != '']
 
@@ -36,8 +39,13 @@ def string2list(sequences):
         if len(sequence) != first_length :
             valSame = False
             break
+        for char in sequence:
+            if char not in 'ARNDCQEGHILKMFPSTWYV':
+                valValid = False
+                break
+    
 
-    return sequences, valSize,valSame
+    return sequences, valSize,valSame,valValid
 
 def drawlogo(sequences):
     data = pd.DataFrame({char: [0]*len(sequences[0]) for char in 'ARNDCQEGHILKMFPSTWYV'})
