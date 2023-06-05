@@ -2,3 +2,5 @@
 Homework 3: Sequence Logo Visualization
 CS340 Yuan Ze University 
 1/06/2023
+
+You can visit the website [here](www.axelardy2.pythoneverywhere.com)
