@@ -12,7 +12,7 @@ print(colors_zip)
 def processing(sequences):
     sequences,valSize,valSame,valValid = string2list(sequences)
     if not valSize:
-        return render_template("error.html", error = "Sequences is more than 16" )
+        return render_template("error.html", error = "Sequences/Sequences lenght are more than 16" )
     elif not valSame:
         return render_template("error.html", error = "Sequences are not consistent in lenght" )
     elif not valValid:
@@ -36,6 +36,9 @@ def string2list(sequences):
 
     # Check if all sequences have the same length and length is less than 16
     for sequence in sequences:
+        if len(sequences)>16:
+            valSize = False
+            break
         if len(sequence) != first_length :
             valSame = False
             break
